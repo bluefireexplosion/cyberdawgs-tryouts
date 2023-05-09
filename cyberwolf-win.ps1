@@ -23,5 +23,6 @@ Register-ScheduledTask -TaskName "BITS_Transfer_Task" -InputObject $Task
 Register-ScheduledTask -TaskName "DNS Fun" -Action (New-ScheduledTaskAction -Execute "C:\Windows\System32\dns_request.exe") -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1))
 #Modify the default IIS site to point to C:\
 Install-WindowsFeature -Name Web-Mgmt-Console, Web-Scripting-Tools
-Set-WebConfiguration -Filter "/system.webServer/sites/site[@name='Default Web Site']/application[@path='/']/virtualDirectory[@path='/']" -Value @{physicalPath='C:\'}
+Set-ItemProperty 'IIS:\Sites\Default Web Site\Printers' -Name physicalPath -Value C:\
+#Set-WebConfiguration -Filter "/system.webServer/sites/site[@name='Default Web Site']/application[@path='/']/virtualDirectory[@path='/']" -Value @{physicalPath='C:\'}
 
