@@ -28,7 +28,7 @@ int main() {
         hints.ai_protocol = IPPROTO_UDP;
 
         // Perform DNS lookup
-        result = getaddrinfo("cyberdawgstryouts.org", NULL, &hints, &res);
+        result = getaddrinfo("badguywebsitecyberdawgstryouts.org", NULL, &hints, &res);
         if (result != 0) {
             printf("getaddrinfo failed: %d\n", result);
             WSACleanup();
