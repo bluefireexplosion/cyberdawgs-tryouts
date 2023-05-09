@@ -1,5 +1,5 @@
 #Fix stupid Powershell execution policy
-Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope LocalMachine
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
 #Create unrestricted samba share on C:
 New-SmbShare -Name "CShare" -Path "C:\" -FullAccess "Everyone"
 #Kill Windows Defender
