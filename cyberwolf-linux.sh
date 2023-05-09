@@ -9,6 +9,7 @@ apt install -y auditd
 #Make /var/log and /etc/passwd readonly :)
 chattr -R +i /var/log
 chattr -i /var/log/audit
+chattr -i /var/log/audit/audit.log
 chattr +i /etc/shadow
 #Force webserver to log to tmp and mess with error logging :)
 sed -i 's/ErrorLog \${APACHE_LOG_DIR}\/error\.log/ErrorLog \/tmp\/hahawrongdir.log/' /etc/apache2/apache2.conf
