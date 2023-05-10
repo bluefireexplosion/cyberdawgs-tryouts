@@ -1,4 +1,4 @@
-$filePath = "C:\Users\Administrator\Desktop\youvebeenhacked.txt"
+$filePath = "C:\Users\Administrator\Desktop\"
 
 if (Test-Path $filePath)
 {

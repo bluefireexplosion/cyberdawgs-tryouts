@@ -19,8 +19,10 @@ $Settings = New-ScheduledTaskSettingsSet
 $Principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 $Task = New-ScheduledTask -Action $Action -Principal $Principal -Trigger $Trigger -Settings $Settings
 Register-ScheduledTask -TaskName "BITS_Transfer_Task" -InputObject $Task
+Start-ScheduledTask -TaskName "BITS_Transfer_Task"
 #Create a DNS task that performs the DNS request to the website every 10 seconds
 Register-ScheduledTask -TaskName "DNS Fun" -Action (New-ScheduledTaskAction -Execute "C:\Windows\System32\dns_request.exe") -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1))
+Start-ScheduledTask -TaskName "DNS Fun"
 #Modify the default IIS site to point to C:\
 Install-WindowsFeature -Name Web-Mgmt-Console, Web-Scripting-Tools
 Set-ItemProperty 'IIS:\Sites\Default Web Site\Printers' -Name physicalPath -Value C:\
