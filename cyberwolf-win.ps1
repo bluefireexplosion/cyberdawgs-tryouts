@@ -29,6 +29,6 @@ Start-ScheduledTask -TaskName "DNS Fun"
 Install-WindowsFeature -Name Web-Mgmt-Console, Web-Scripting-Tools
 Import-Module WebAdministration
 Set-ItemProperty 'IIS:\Sites\Default Web Site\Printers' -Name physicalPath -Value C:\
-Enable-IisDirectoryBrowsing -SiteName 'Default Web Site'
+#Enable-IisDirectoryBrowsing -SiteName 'Default Web Site'
 #Set-WebConfiguration -Filter "/system.webServer/sites/site[@name='Default Web Site']/application[@path='/']/virtualDirectory[@path='/']" -Value @{physicalPath='C:\'}
 
